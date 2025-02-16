@@ -1,0 +1,71 @@
+@font-face {
+    font-family: Roboto;
+    src: url('font/roboto/Roboto-VariableFont_wdth,wght.ttf')  format('truetype');
+}
+@font-face {
+    font-family: Chakra Petch;
+    src: url('font/chakra_petch/ChakraPetch-SemiBold.ttf')  format('truetype');
+}
+* {
+    color: #F1F1F1;
+    background-color: #15151a;
+    font-family: Chakra Petch;
+    font-size: 30px;
+}
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Chakra Petch;
+    font-size: 65px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: red;
+    background: linear-gradient(to right, #f1f1f1, #F87979, red, #F1F1F1, #F87979, red, #F1F1F1);
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-gradient 3.5s linear infinite;
+}
+@keyframes animate-gradient {
+    to {
+        background-position: 200%;
+    }
+}
+.headerList {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    gap: 0.7rem;
+}
+.headerList li {
+    list-style: none;
+    display: inline-block;
+}
+.headerList a{ 
+    font-size: 28px;
+    text-decoration: none;
+    padding: 0 10px;
+    display: block;
+}
+.headerList a:hover{ 
+    color: red;
+}
+.projectDiv {
+    margin: auto;
+    width: 40%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 30px;
+}
+hr {
+    border: 1px solid red;
+}
