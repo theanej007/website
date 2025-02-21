@@ -48,7 +48,6 @@ h1 {
 }
 .headerList a{ 
     font-size: 28px;
-    text-decoration: none;
     padding: 0 10px;
     display: block;
 }
@@ -64,4 +63,12 @@ h1 {
 }
 hr {
     border: 1px solid red;
+}
+p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a {
+    text-decoration: none;
 }
