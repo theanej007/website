@@ -82,3 +82,36 @@ a {
 .specialA:hover {
     color: rgb(180, 0, 0);
 }
+.loginDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#username {
+    border: 2px solid red;
+    border-radius: 4px;
+    background-color: #101014;
+    margin: 5px;
+}
+#password {
+    border: 2px solid red;
+    border-radius: 4px;
+    background-color: #101014;
+    margin: 5px;
+}
+#loginBtn {
+    background-color: #101014;
+    border: solid;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loginBtn:hover {
+    background-color: #0a0a0c;
+}

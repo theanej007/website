@@ -17,12 +17,16 @@
         <hr>
     </header>
     <body>
-        <p>Hi, my name is Anej and I'm a student at &nbsp;<a class="specialA" href="https://www.vegova.si/">Vegova</a>.</p>
-        <p>This website is a project I'm curentlly working on.</p>
-        <p>It is running on an old computer with 2GB of ram and a 2 core &nbsp;<a class="specialA" href="https://www.amd.com/">amd</a>&nbsp; processor😓.</p>
-        <br>
-        <p>Some of my latest projects are:</p>
-        <div class="projectDiv" style="width: 40%"></div>
-        <script src="index.js"></script>
+        <h2 style="margin-bottom: 10px; font-size: 40px">Log in to your account!</h2>
+        <div class="loginDiv">
+            <form for="/login.js" method="POST">
+                    <label>Username:</label><br>
+                    <input id="username" name="username" type="text"><br>
+                    <label>Password:</label><br>
+                    <input id="password" name="password" type="password"><br>
+                    <input type="button" value="Submit" id="loginBtn">
+            </form>
+        </div>
+        <script src="login.js"></script>
     </body>
 </html>
