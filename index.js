@@ -5,7 +5,7 @@ async function fe() {
         let eleH2 = [];
         let eleP = [];
         let eleA = [];
-        let st = 3;
+        let st = 2;
         for (let i = 0; i < st; i++) {
             if (repo[i].name !== "theanej007") {
                 eleDiv[i] = document.createElement("div");
