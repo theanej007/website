@@ -17,6 +17,9 @@ async function login(){
         par.parentNode.insertBefore(errm, par);
         wrong++;
     }
+    else if(a == 1){
+        window.location.replace("index.html");
+    }
 }
 let wrong = 0;
 document.getElementById("loginBtn").onclick = login;

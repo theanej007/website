@@ -7,17 +7,24 @@ async function login(){
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     }).then(res => res.json()).catch(err => console.error(err));
-    if(a != 1 && wrong == 0){
-        let errm = document.createElement("p");
-        errm.id = "loginErr";
-        errm.style.fontSize = "15px";
-        errm.style.color = "red";
-        errm.textContent = "Wrong username or password!";
+    if(a == -1){
+        errm.textContent = "Password must be longer than 6 and include at least one number!";
+    }
+    else if (a == 0){
+        errm.textContent = "Username has already been taken!";
+    }
+    else if(a == 1){
+        window.location.replace("login.html");
+    }
+    if(wrong == 0){
         let par = document.getElementById("par");
         par.parentNode.insertBefore(errm, par);
         wrong++;
     }
-    console.log("<?php echo$_SESSION['name']?>");
 }
 let wrong = 0;
 document.getElementById("registerBtn").onclick = login;
+let errm = document.createElement("p");
+errm.id = "loginErr";
+errm.style.fontSize = "15px";
+errm.style.color = "red";
