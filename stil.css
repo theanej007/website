@@ -112,6 +112,19 @@ a {
     justify-content: center;
     align-items: center;
 }
+#registerBtn {
+    background-color: #101014;
+    border: solid;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #loginBtn:hover {
     background-color: #0a0a0c;
 }
