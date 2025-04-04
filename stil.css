@@ -2,6 +2,10 @@
     font-family: Chakra Petch;
     src: url('font/chakra_petch/ChakraPetch-SemiBold.ttf')  format('truetype');
 }
+@font-face {
+    font-family: Bit;
+    src: url('font/bit/ARCADEPI.TTF')  format('truetype');
+}
 * {
     color: #F1F1F1;
     background-color: #15151a;
@@ -127,4 +131,18 @@ a {
 }
 #loginBtn:hover {
     background-color: #0a0a0c;
+}
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.interactiveA {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.interactiveA:hover {
+    color: red;
 }

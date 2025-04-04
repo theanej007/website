@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="stil.css">
+        <link rel="stylesheet" href="../../../stil.css">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BALLS</title>
     </head>
@@ -11,16 +12,16 @@
             <li><a href="interactive.html">INTERACTIVE</a></li>
             <li><a href="projects.html">PROJECTS</a></li>
             <li><a href="about.html">ABOUT</a></li>
-            <li><a id="account" href="login.html">LOG IN</a></li>
+            <li><a href="login.html">LOG IN</a></li>
         </ul>
         <h1>Anej Grojzdek</h1>
         <hr>
     </header>
     <body>
-        <div>
-            <p>ALL PROJECTS</p>
-        </div>
-        <script src="projects.js"></script>
-        <script src="log_info.js"></script>
+        <p>Projects you can interact with!</p>
+        <a class="interactiveA" href="interactive/pong/pong.html">PONG</a>
+        <div class="projectDiv" style="width: 30%"></div>
+        <p style="margin: 10px;">Play oldschool pong!</p>
+        <script type="module" src="interactive.js"></script>
     </body>
 </html>
