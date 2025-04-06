@@ -13,6 +13,7 @@ var select = new Audio("blipSelect.wav");
 var blip = new Audio("blip.wav");
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+let mode = 0;
 
 let x1 = 15;
 let x2 = 607;
@@ -30,9 +31,24 @@ let bsy = (Math.random() * 100 > 50) ? 0.6 : -0.6;
 
 let score1 = 0;
 let score2 = 0;
+let score3 = 0;
 
-function animation() {
-    requestAnimationFrame(animation);
+let anim;
+async function animation() {
+    anim = requestAnimationFrame(animation);
+    if (score1 === 11) {
+        cancelAnimationFrame(anim);
+        c.fillText("YOU WIN", 240, 230);
+        await sleep(2000);
+        startMenu();
+        return;
+    } else if (score2 === 11) {
+        cancelAnimationFrame(anim);
+        c.fillText("YOU LOSE", 222, 230);
+        await sleep(2000);
+        startMenu();
+        return;
+    }
     c.clearRect(0, 0, 640, 480);
     c.fillRect(x1, y1, 18, 100);
     c.fillRect(x2, y2, 18, 100);
@@ -45,8 +61,18 @@ function animation() {
     if (move1d && y1 > 5) {
         y1 -= 1.5;
     }
+    if (mode === 1 && by + 9 > y2) {
+        move2u = true;
+    } else if (mode === 1) {
+        move2u = false;
+    }
     if (move2u && y2 < 375) {
         y2 += 1.5;
+    }
+    if (mode === 1 && by + 9 < y2 + 100) {
+        move2d = true;
+    } else if (mode === 1) {
+        move2d = false;
     }
     if (move2d && y2 > 5) {
         y2 -= 1.5;
@@ -61,23 +87,26 @@ function animation() {
         bsy = -bsy;
         hit.play();
     }
-    if (bx > x2 - 17 && by > y2 - 18 && by < y2 + 100) {
+    if (bx > x2 - 17 && bx > x2 - 14 && by > y2 - 18 && by < y2 + 100) {
         bsy = -bsy;
         hit.play();
     }
-    if (bx < x1 + 17 && by > y2 - 18 && by < y2 + 100) {
+    if (bx < x1 + 17 && bx > x1 + 14 && by > y1 - 18 && by < y1 + 100) {
         bsy = -bsy;
         hit.play();
     }
     if (bx > x2 - 18 && bx < x2 - 3 && by > y2 - 17 && by < y2 + 99) {
-        bounce(1);
+        score3++;
+        bounce(0);
     }
     if (bx < x1 + 18 && bx > x1 + 3 && by > y1 - 17 && by < y1 + 99) {
-        bounce(0);
+        score3++;
+        bounce(1);
     }
 
     // POINT SYSTEM
     if (bx < -18) {
+        score3 = 0;
         score2++;
         bx = 311;
         by = 231;
@@ -86,6 +115,7 @@ function animation() {
         score.play();
     }
     if (bx > 640) {
+        score3 = 0;
         score1++;
         bx = 311;
         by = 231;
@@ -100,12 +130,31 @@ function animation() {
     c.fillRect(0, 0, 640, 5);
     c.fillRect(0, 475, 640, 5);
 
-    c.fillText(score1, 230, 50);
-    c.fillText(score2, 387, 50);
+    if (mode === 0) {
+        c.fillText(score3, 305, 50);
+    } else {
+        c.fillText(score1, 230, 50);
+        c.fillText(score2, 387, 50);
+    }
 }
-
-c.fillText("START", 260, 230);
 let start = 0;
+function startMenu() {
+    c.clearRect(0, 0, 640, 480);
+    c.fillText("START", 260, 230);
+    start = 0;
+    score1 = 0;
+    score2 = 0;
+    score3 = 0;
+    bx = 311;
+    by = 231;
+    bsx = (Math.random() * 100 > 50) ? 0.6 : -0.6;
+    bsy = (Math.random() * 100 > 50) ? 0.6 : -0.6;
+    x1 = 15;
+    x2 = 607;
+    y1 = 190;
+    y2 = 190;
+}
+startMenu();
 
 function bounce(a) {
     bsx = -bsx;
@@ -125,13 +174,22 @@ window.addEventListener("click", async (event) => {
         var canvasPos = event.target.getBoundingClientRect();
         var x = event.clientX - canvasPos.left;
         var y = event.clientY - canvasPos.top;
-        if (x > 250 && x < 360 && y > 200 && y < 240) {
+        if (start === 0 && x > 250 && x < 360 && y > 200 && y < 240) {
             start++;
             if (start == 1) {
                 select.play();
-                await startSeq();
-                animation();
+                c.clearRect(0, 0, 640, 480);
+                c.fillText("Singleplayer", 195, 180);
+                c.fillText("Against bot", 200, 230);
             }
+        } else if (start === 1 && x > 186 && x < 432 && y > 147 && y < 195) {
+            mode = 0;
+            await startSeq();
+            animation();
+        } else if (start === 1 && x > 191 && x < 425 && y > 199 && y < 235) {
+            mode = 1;
+            await startSeq();
+            animation();
         }
     }
 })
@@ -155,20 +213,32 @@ async function startSeq() {
 window.addEventListener("keydown", (event) => {
     if (event.key === "ArrowDown") {
         move1u = true;
-        move2u = true;
+        if (mode === 0) {
+            move2u = true;
+        }
     }
     if (event.key === "ArrowUp") {
         move1d = true;
-        move2d = true;
+        if (mode === 0) {
+            move2d = true;
+        }
+    }
+    if (event.key === "Escape"){
+        cancelAnimationFrame(anim);
+        startMenu();
     }
 });
 window.addEventListener("keyup", (event) => {
     if (event.key === "ArrowDown") {
         move1u = false;
-        move2u = false;
+        if (mode === 0) {
+            move2u = false;
+        }
     }
     if (event.key === "ArrowUp") {
         move1d = false;
-        move2d = false;
+        if (mode === 0) {
+            move2d = false;
+        }
     }
 });
