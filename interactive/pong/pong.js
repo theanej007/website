@@ -6,6 +6,7 @@ canvas.focus();
 let c = canvas.getContext('2d');
 c.fillStyle = "white";
 c.font = "30px Bit";
+const fps = 60;
 
 var hit = new Audio("hitHurt.wav");
 var score = new Audio("pickupCoin.wav");
@@ -26,16 +27,26 @@ let move2d = false;
 
 let bx = 311;
 let by = 231;
-let bsx = (Math.random() * 100 > 50) ? 0.6 : -0.6;
-let bsy = (Math.random() * 100 > 50) ? 0.6 : -0.6;
+let bsx;
+let bsy;
 
 let score1 = 0;
 let score2 = 0;
 let score3 = 0;
 
 let anim;
+let quit;
+
 async function animation() {
-    anim = requestAnimationFrame(animation);
+    if(quit == true){
+        quit = false;
+        cancelAnimationFrame(anim);
+        startMenu();
+        return;
+    }
+    setTimeout(() => {
+        anim = requestAnimationFrame(animation);
+    }, 1000 / fps);
     if (score1 === 11) {
         cancelAnimationFrame(anim);
         c.fillText("YOU WIN", 240, 230);
@@ -56,10 +67,10 @@ async function animation() {
 
     // PADDLE MOVEMENT
     if (move1u && y1 < 375) {
-        y1 += 1.5;
+        y1 += 4;
     }
     if (move1d && y1 > 5) {
-        y1 -= 1.5;
+        y1 -= 4;
     }
     if (mode === 1 && by + 9 > y2) {
         move2u = true;
@@ -67,7 +78,7 @@ async function animation() {
         move2u = false;
     }
     if (move2u && y2 < 375) {
-        y2 += 1.5;
+        y2 += 4;
     }
     if (mode === 1 && by + 9 < y2 + 100) {
         move2d = true;
@@ -75,7 +86,7 @@ async function animation() {
         move2d = false;
     }
     if (move2d && y2 > 5) {
-        y2 -= 1.5;
+        y2 -= 4;
     }
 
     // BALL COLLISIONS
@@ -110,8 +121,8 @@ async function animation() {
         score2++;
         bx = 311;
         by = 231;
-        bsx = (Math.random() * 100 > 50) ? 0.6 : -0.6;
-        bsy = (Math.random() * 100 > 50) ? 0.6 : -0.6;
+        bsx = (Math.random() * 100 > 50) ? 2.6 : -2.6;
+        bsy = (Math.random() * 100 > 50) ? 2.6 : -2.6;
         score.play();
     }
     if (bx > 640) {
@@ -119,8 +130,8 @@ async function animation() {
         score1++;
         bx = 311;
         by = 231;
-        bsx = (Math.random() * 100 > 50) ? 0.6 : -0.6;
-        bsy = (Math.random() * 100 > 50) ? 0.6 : -0.6;
+        bsx = (Math.random() * 100 > 50) ? 2.6 : -2.6;
+        bsy = (Math.random() * 100 > 50) ? 2.6 : -2.6;
         score.play();
     }
 
@@ -137,6 +148,20 @@ async function animation() {
         c.fillText(score2, 387, 50);
     }
 }
+
+function bounce(a) {
+    bsx = -bsx;
+    if (bsx < 0) {
+        bsx -= 0.15;
+    } else {
+        bsx += 0.15;
+    }
+    let raz = (((a == 1) ? y1 : y2) + 50) - (by + 9);
+    bsy = -raz * 0.08;
+    hit.play();
+}
+
+// STARTING MENU
 let start = 0;
 function startMenu() {
     c.clearRect(0, 0, 640, 480);
@@ -147,28 +172,14 @@ function startMenu() {
     score3 = 0;
     bx = 311;
     by = 231;
-    bsx = (Math.random() * 100 > 50) ? 0.6 : -0.6;
-    bsy = (Math.random() * 100 > 50) ? 0.6 : -0.6;
+    bsx = (Math.random() * 100 > 50) ? 2.2 : -2.2;
+    bsy = (Math.random() * 100 > 50) ? 2.2 : -2.2;
     x1 = 15;
     x2 = 607;
     y1 = 190;
     y2 = 190;
 }
 startMenu();
-
-function bounce(a) {
-    bsx = -bsx;
-    if (bsx < 0) {
-        bsx -= 0.1;
-    } else {
-        bsx += 0.1;
-    }
-    let raz = (((a == 1) ? y1 : y2) + 50) - (by + 9);
-    bsy = -raz * 0.03;
-    hit.play();
-}
-
-// STARTING MENU
 window.addEventListener("click", async (event) => {
     if (event.target == canvas) {
         var canvasPos = event.target.getBoundingClientRect();
@@ -183,11 +194,15 @@ window.addEventListener("click", async (event) => {
                 c.fillText("Against bot", 200, 230);
             }
         } else if (start === 1 && x > 186 && x < 432 && y > 147 && y < 195) {
+            start++;
             mode = 0;
+            select.play();
             await startSeq();
             animation();
         } else if (start === 1 && x > 191 && x < 425 && y > 199 && y < 235) {
+            start++;
             mode = 1;
+            select.play();
             await startSeq();
             animation();
         }
@@ -223,9 +238,8 @@ window.addEventListener("keydown", (event) => {
             move2d = true;
         }
     }
-    if (event.key === "Escape"){
-        cancelAnimationFrame(anim);
-        startMenu();
+    if (event.key === "Escape") {
+        quit = true;
     }
 });
 window.addEventListener("keyup", (event) => {

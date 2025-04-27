@@ -18,7 +18,21 @@ async function login(){
         wrong++;
     }
     else if(a == 1){
-        window.location.replace("index.html");
+        let name = "lastpage=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        let temp = "";
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            temp = c.substring(name.length, c.length);
+          }
+        }
+        console.log(temp);
+        window.location.replace(temp);
     }
 }
 let wrong = 0;

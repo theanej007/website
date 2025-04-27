@@ -1,17 +1,20 @@
 @font-face {
     font-family: Chakra Petch;
-    src: url('font/chakra_petch/ChakraPetch-SemiBold.ttf')  format('truetype');
+    src: url('font/chakra_petch/ChakraPetch-SemiBold.ttf') format('truetype');
 }
+
 @font-face {
     font-family: Bit;
-    src: url('font/bit/ARCADEPI.TTF')  format('truetype');
+    src: url('font/bit/ARCADEPI.TTF') format('truetype');
 }
+
 * {
     color: #F1F1F1;
     background-color: #15151a;
     font-family: Chakra Petch;
     font-size: 30px;
 }
+
 h1 {
     display: flex;
     justify-content: center;
@@ -28,11 +31,13 @@ h1 {
     -webkit-text-fill-color: transparent;
     animation: animate-gradient 3.5s linear infinite;
 }
+
 @keyframes animate-gradient {
     to {
         background-position: 200%;
     }
 }
+
 .headerList {
     padding-left: 0;
     display: flex;
@@ -41,18 +46,22 @@ h1 {
     margin: 5px 0;
     gap: 0.7rem;
 }
+
 .headerList li {
     list-style: none;
     display: inline-block;
 }
-.headerList a{ 
+
+.headerList a {
     font-size: 28px;
     padding: 0 10px;
     display: block;
 }
-.headerList a:hover{ 
+
+.headerList a:hover {
     color: red;
 }
+
 .projectDiv {
     margin: auto;
     width: 60%;
@@ -61,14 +70,17 @@ h1 {
     border-radius: 30px;
     margin-bottom: 20px;
 }
+
 hr {
     border: 1px solid red;
 }
+
 h2 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 p {
     display: flex;
     justify-content: center;
@@ -77,32 +89,39 @@ p {
     margin-right: 20px;
     text-align: center;
 }
+
 a {
     text-decoration: none;
 }
+
 .specialA {
     color: red;
 }
+
 .specialA:hover {
     color: rgb(180, 0, 0);
 }
+
 .loginDiv {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 #username {
     border: 2px solid red;
     border-radius: 4px;
     background-color: #101014;
     margin: 5px;
 }
+
 #password {
     border: 2px solid red;
     border-radius: 4px;
     background-color: #101014;
     margin: 5px;
 }
+
 #loginBtn {
     background-color: #101014;
     border: solid;
@@ -116,6 +135,7 @@ a {
     justify-content: center;
     align-items: center;
 }
+
 #registerBtn {
     background-color: #101014;
     border: solid;
@@ -129,20 +149,60 @@ a {
     justify-content: center;
     align-items: center;
 }
+
 #loginBtn:hover {
     background-color: #0a0a0c;
 }
+
 #game {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .interactiveA {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
 }
+
 .interactiveA:hover {
     color: red;
+}
+
+
+.dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
 }
